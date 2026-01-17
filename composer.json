@@ -1,0 +1,86 @@
+{
+  "name": "mikehins/laravel-shoppingcart",
+  "version": "1.0.0",
+  "description": "Laravel Shopping Cart",
+  "homepage": "https://github.com/mikehins/laravel-shoppingcart",
+  "support": {
+    "issues": "https://github.com/mikehins/laravel-shoppingcart/issues",
+    "source": "https://github.com/mikehins/laravel-shoppingcart"
+  },
+  "type": "library",
+  "keywords": [
+    "laravel",
+    "shopping cart",
+    "cart"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mike Hins",
+      "email": "mike@hins.dev"
+    }
+  ],
+  "require": {
+    "php": "^8.3",
+    "illuminate/support": "^12.0",
+    "illuminate/session": "^12.0",
+    "illuminate/events": "^12.0"
+  },
+  "require-dev": {
+    "driftingly/rector-laravel": "^2.1",
+    "larastan/larastan": "^3.8",
+    "laravel/pint": "^1.27",
+    "nunomaduro/phpinsights": "^2.13",
+    "orchestra/testbench": "^v10.9.0",
+    "pestphp/pest": "^4.1.1",
+    "pestphp/pest-plugin-type-coverage": "^4.0.3",
+    "phpstan/phpstan": "^2.1.33",
+    "rector/rector": "^2.3.1",
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mikehins\\Cart\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Mikehins\\Cart\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Mikehins\\Cart\\CartServiceProvider"
+      ],
+      "aliases": {
+        "Cart": "Mikehins\\Cart\\Facades\\CartFacade"
+      }
+    }
+  },
+  "scripts": {
+    "test": [
+      "vendor/bin/pest --parallel",
+      "vendor/bin/pest --mutate --parallel",
+      "vendor/bin/pest --type-coverage --min=97 --parallel",
+      "vendor/bin/pint --preset laravel",
+      "vendor/bin/rector process --dry-run",
+      "vendor/bin/phpstan analyse"
+    ]
+  },
+  "config": {
+    "platform": {
+      "php": "8.3"
+    },
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "pestphp/pest-plugin": true
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
