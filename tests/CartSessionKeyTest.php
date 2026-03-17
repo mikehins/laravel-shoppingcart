@@ -66,3 +66,31 @@ it('cart stores conditions in correct session key', function () {
     expect($session->has('test_key'))->toBeFalse();
     expect($session->has('_cart_conditions'))->toBeFalse();
 });
+
+test('session method rejects empty string', function () {
+    $cart = $this->getCart();
+    
+    expect(fn () => $cart->session(''))
+        ->toThrow(Exception::class, 'Session key is required.');
+});
+
+test('session method rejects string zero', function () {
+    $cart = $this->getCart();
+    
+    expect(fn () => $cart->session('0'))
+        ->toThrow(Exception::class, 'Session key is required.');
+});
+
+test('session method accepts valid session key', function () {
+    $cart = $this->getCart();
+    $result = $cart->session('my_cart');
+    
+    expect($result)->toBe($cart);
+});
+
+test('session method accepts numeric session key', function () {
+    $cart = $this->getCart();
+    $result = $cart->session('1');
+    
+    expect($result)->toBe($cart);
+});
