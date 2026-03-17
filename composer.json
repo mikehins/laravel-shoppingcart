@@ -22,9 +22,9 @@
   ],
   "require": {
     "php": "^8.3",
-    "illuminate/support": "^12.0",
-    "illuminate/session": "^12.0",
-    "illuminate/events": "^12.0"
+    "illuminate/support": "^12.0|^13.0",
+    "illuminate/session": "^12.0|^13.0",
+    "illuminate/events": "^12.0|^13.0"
   },
   "require-dev": {
     "driftingly/rector-laravel": "^2.1",
