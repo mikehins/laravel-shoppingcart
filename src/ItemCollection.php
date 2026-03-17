@@ -24,6 +24,7 @@ final class ItemCollection extends Collection
     /**
      * @param  string|int  $key
      */
+    #[\Override]
     public function __get(mixed $key): mixed
     {
         if ($this->has($key) || $key === 'model') {

@@ -3,10 +3,28 @@
 declare(strict_types=1);
 
 use Mikehins\Cart\Cart;
+use Mikehins\Cart\CartCondition;
 use Mikehins\Cart\Tests\Helpers\SessionMock;
 use Mockery as m;
 
 covers(Cart::class);
+
+beforeEach(function () {
+    $events = m::mock('Illuminate\Contracts\Events\Dispatcher');
+    $events->shouldReceive('dispatch');
+
+    $this->cart = new Cart(
+        new SessionMock,
+        $events,
+        'shopping',
+        'SAMPLESESSIONKEY',
+        require (__DIR__.'/Helpers/configMock.php')
+    );
+});
+
+afterEach(function () {
+    m::close();
+});
 
 it('cart stores items in correct session key', function () {
     $session = new SessionMock;
@@ -51,7 +69,7 @@ it('cart stores conditions in correct session key', function () {
         require (__DIR__.'/Helpers/configMock.php')
     );
 
-    $condition = new Mikehins\Cart\CartCondition([
+    $condition = new CartCondition([
         'name' => 'VAT 12.5%',
         'type' => 'tax',
         'target' => 'subtotal',
@@ -68,29 +86,29 @@ it('cart stores conditions in correct session key', function () {
 });
 
 test('session method rejects empty string', function () {
-    $cart = $this->getCart();
-    
+    $cart = $this->cart;
+
     expect(fn () => $cart->session(''))
         ->toThrow(Exception::class, 'Session key is required.');
 });
 
 test('session method rejects string zero', function () {
-    $cart = $this->getCart();
-    
+    $cart = $this->cart;
+
     expect(fn () => $cart->session('0'))
         ->toThrow(Exception::class, 'Session key is required.');
 });
 
 test('session method accepts valid session key', function () {
-    $cart = $this->getCart();
+    $cart = $this->cart;
     $result = $cart->session('my_cart');
-    
+
     expect($result)->toBe($cart);
 });
 
 test('session method accepts numeric session key', function () {
-    $cart = $this->getCart();
+    $cart = $this->cart;
     $result = $cart->session('1');
-    
+
     expect($result)->toBe($cart);
 });

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mikehins\Cart;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Override;
 
@@ -25,7 +26,7 @@ final class CartServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'shopping_cart');
 
-        $this->app->singleton('cart', function (\Illuminate\Contracts\Foundation\Application $app): Cart {
+        $this->app->singleton('cart', function (Application $app): Cart {
             /** @var string|null $storageClass */
             $storageClass = config('shopping_cart.storage');
             /** @var string|null $eventsClass */

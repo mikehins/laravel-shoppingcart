@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Mikehins\Cart\Cart;
+use Mikehins\Cart\Exceptions\InvalidItemException;
+use Mikehins\Cart\ItemAttributeCollection;
 use Mikehins\Cart\Tests\Helpers\MockProduct;
 use Mikehins\Cart\Tests\Helpers\SessionMock;
 use Mockery as m;
@@ -124,7 +126,7 @@ it('keeps attributes as ItemAttributeCollection after update', function () {
 
     $cartItem = $this->cart->get(456);
 
-    expect($cartItem->attributes)->toBeInstanceOf(Mikehins\Cart\ItemAttributeCollection::class);
+    expect($cartItem->attributes)->toBeInstanceOf(ItemAttributeCollection::class);
 
     $updatedItem = [
         'attributes' => [
@@ -134,7 +136,7 @@ it('keeps attributes as ItemAttributeCollection after update', function () {
     ];
     $this->cart->update(456, $updatedItem);
 
-    expect($cartItem->attributes)->toBeInstanceOf(Mikehins\Cart\ItemAttributeCollection::class);
+    expect($cartItem->attributes)->toBeInstanceOf(ItemAttributeCollection::class);
 });
 
 it('can handle item attributes', function () {
@@ -380,19 +382,19 @@ it('does not reduce quantity below zero when ignoring negative updates', functio
 
 it('throws exception when provided invalid values (price 0 check?)', function () {
     // Scenario 1
-    $this->expectException(Mikehins\Cart\Exceptions\InvalidItemException::class);
+    $this->expectException(InvalidItemException::class);
     $this->cart->add(455, 'Sample Item', 100.99, 0, []);
 });
 
 it('throws exception when name is empty', function () {
     // Scenario 2
-    $this->expectException(Mikehins\Cart\Exceptions\InvalidItemException::class);
+    $this->expectException(InvalidItemException::class);
     $this->cart->add('', 'Sample Item', 100.99, 2, []);
 });
 
 it('throws exception when id is empty', function () {
     // Scenario 3
-    $this->expectException(Mikehins\Cart\Exceptions\InvalidItemException::class);
+    $this->expectException(InvalidItemException::class);
     $this->cart->add(523, '', 100.99, 2, []);
 });
 

@@ -29,7 +29,7 @@ abstract class Validator
 
     final public static function instance(): Factory
     {
-        if (! static::$factory instanceof \Illuminate\Validation\Factory) {
+        if (! static::$factory instanceof Factory) {
             $loader = new FileLoader(
                 new Filesystem, '/Translations'
             );

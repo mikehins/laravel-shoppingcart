@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Mikehins\Cart\Cart;
 use Mikehins\Cart\CartCondition;
+use Mikehins\Cart\Exceptions\UnknownModelException;
 use Mikehins\Cart\ItemAttributeCollection;
 use Mikehins\Cart\ItemCollection;
 use Mikehins\Cart\Tests\Helpers\MockProduct;
@@ -85,7 +86,7 @@ it('item associate model', function () {
 });
 
 it('it will throw an exception when a non existing model is being associated', function () {
-    $this->expectException(Mikehins\Cart\Exceptions\UnknownModelException::class);
+    $this->expectException(UnknownModelException::class);
     $this->expectExceptionMessage('The supplied model SomeModel does not exist.');
 
     $this->cart->add(1, 'Test item', 1, 10.00)->associate('SomeModel');
