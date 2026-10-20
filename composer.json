@@ -27,15 +27,17 @@
     "illuminate/events": "^12.0|^13.0"
   },
   "require-dev": {
-    "driftingly/rector-laravel": "^2.1",
-    "larastan/larastan": "^3.8",
-    "laravel/pint": "^1.27",
-    "nunomaduro/phpinsights": "^2.13",
-    "orchestra/testbench": "^v10.9.0",
-    "pestphp/pest": "^4.1.1",
-    "pestphp/pest-plugin-type-coverage": "^4.0.3",
-    "phpstan/phpstan": "^2.1.33",
-    "rector/rector": "^2.3.1",
+    "driftingly/rector-laravel": "^2.7",
+    "larastan/larastan": "^3.13",
+    "laravel/pao": "^1.1.5",
+    "laravel/pint": "^1.32.1",
+    "laravel/vet": "^0.2.1",
+    "nunomaduro/phpinsights": "^2.15",
+    "orchestra/testbench": "^11.3",
+    "pestphp/pest": "^5.3.3",
+    "pestphp/pest-plugin-type-coverage": "^5.0.3",
+    "phpstan/phpstan": "^2.3.1",
+    "rector/rector": "^2.7.0",
     "roave/security-advisories": "dev-latest"
   },
   "autoload": {
@@ -65,19 +67,17 @@
     "test": [
       "vendor/bin/pest --parallel",
       "vendor/bin/pest --mutate --parallel",
-      "vendor/bin/pest --type-coverage --min=97 --parallel",
+      "vendor/bin/pest --type-coverage --min=97",
       "vendor/bin/pint --preset laravel",
       "vendor/bin/rector process --dry-run",
       "vendor/bin/phpstan analyse"
     ]
   },
   "config": {
-    "platform": {
-      "php": "8.3"
-    },
     "sort-packages": true,
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
+      "laravel/vet": true,
       "pestphp/pest-plugin": true
     }
   },

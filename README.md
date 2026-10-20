@@ -9,9 +9,9 @@ A modern, strictly typed, and performance-oriented Shopping Cart implementation 
 
 | Metric | Status |
 |--------|--------|
-| **Tests** | 71 passing |
-| **Type Coverage** | 97.1% |
-| **Mutation Score** | 60.5% |
+| **Tests** | 76 passing |
+| **Type Coverage** | 98.5% |
+| **Mutation Score** | 63.9% |
 | **PHPStan Level** | 5 |
 | **Code Style** | Laravel Pint |
 
@@ -23,7 +23,7 @@ This package is a modernized fork of the original [darryldecode/laravelshoppingc
 - **Laravel 12+ / PHP 8.3+ Support:** Rebuilt to support the latest ecosystems without legacy baggage.
 - **Strict Typing:** All classes use `declare(strict_types=1)` with typed properties and return types.
 - **PHPStan Validated:** Static analysis ensures contract compliance and reduces runtime errors.
-- **Pest Test Suite:** The entire test suite has been migrated from PHPUnit to Pest v3 for better readability.
+- **Pest Test Suite:** The entire test suite has been migrated from PHPUnit to Pest v5 for better readability.
 - **Mutation Testing:** Core logic validated with Pest's mutation testing plugin.
 
 ## 🚀 Installation
@@ -190,7 +190,7 @@ composer test
 This runs:
 1. `pest --parallel` - Unit tests
 2. `pest --mutate --parallel` - Mutation testing
-3. `pest --type-coverage --min=97 --parallel` - Type coverage check
+3. `pest --type-coverage --min=97` - Type coverage check
 4. `pint --preset laravel` - Code style fixing
 5. `rector process --dry-run` - Automated refactoring check
 6. `phpstan analyse` - Static analysis
